@@ -78,7 +78,7 @@ VALUES
 ('O Sol é para Todos', 'Harper Lee', 'José Olympio', '1960', '978-8503012703', 7, 7, 90.00, 'Disponível'),
 ('A Montanha Mágica', 'Thomas Mann', 'Companhia das Letras', '1924', '978-8535925009', 4, 4, 150.00, 'Disponível');
 
-INSERT INTO Emprestimo (id_livro, id_aluno, data_emprestimo, data_devolucao, status_emprestimo) 
+INSERT INTO Emprestimo (id_aluno, id_livro, data_emprestimo, data_devolucao, status_emprestimo) 
 VALUES 
 ('2024-09-01', '2024-09-15', 'Em andamento'),
 ('2024-09-02', '2024-09-16', 'Em andamento'),
