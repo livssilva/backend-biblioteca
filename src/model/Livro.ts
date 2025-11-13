@@ -1,6 +1,10 @@
-class Livro{
-    private idAluno: number;
-    private idLivro: number;
+import type { LivroDTO } from "../interface/LivroDTO.js";
+import { DatabaseModel } from "./DatabaseModel.js";
+
+const database = new DatabaseModel().pool;
+
+class Livro {
+    private idLivro: number = 0;
     private titulo: string;
     private autor: string;
     private editora: string;
@@ -13,8 +17,6 @@ class Livro{
 
 
     constructor(
-        _idAluno: number,
-        _idLivro: number,
         _titulo: string,
         _autor: string,
         _editora: string,
@@ -25,8 +27,7 @@ class Livro{
         _valorAquisicao: number,
         _statusLivroEmprestado: string,
     ) {
-        this.idAluno = _idAluno;
-        this.idLivro = _idLivro;
+
         this.titulo = _titulo;
         this.autor = _autor;
         this.editora = _editora;
@@ -38,12 +39,6 @@ class Livro{
         this.statusLivroEmprestado = _statusLivroEmprestado;
     }  
 
-public getIdAluno(): number{ 
-        return this.idAluno;
-    }    
-public setIdAluno(_idAluno: number): void{
-    this.idAluno = _idAluno;
-}
 
 public getIdLivro(): number{ 
         return this.idLivro;
@@ -123,5 +118,67 @@ public setStatusLivroEmprestado (_statusLivroEmprestado: string){
     this.statusLivroEmprestado = _statusLivroEmprestado;
 }
 
- }
+    static async listarLivros (): Promise<Array<Livro> | null>{
+        try{
+            let listaDeLivros: Array<Livro> = [];
+
+            const querySelectLivros = `SELECT * FROM livro`;
+
+           const respostaBD = await database.query(querySelectLivros);
+
+           respostaBD.rows.forEach((livroBD: any) => {
+            const novoLivro: Livro = new Livro(
+                livroBD.titulo,
+                livroBD.autor,
+                livroBD.editora,
+                livroBD.anoPublicacao,
+                livroBD.isbn,
+                livroBD.quantTotal,
+                livroBD.quantDisponivel,
+                livroBD.valorAquisicao,
+                livroBD.statusLivroEmprestado
+            );
+
+            novoLivro.setIdLivro(livroBD.id_livro);
+
+            listaDeLivros.push(novoLivro);
+
+           });
+
+           return listaDeLivros
+        } catch (error) {
+            console.error(`Erro ao acessar o banco de dados. ${error}`);
+            return null;
+        }
+    }
+
+     static async cadastrarLivro(livro: LivroDTO): Promise<boolean> {
+        try {
+            const queryInsertLivro = `INSERT INTO livro (titulo, autor, editora, ano_publicacao, isbn, quant_total, quant_disponivel, valor_aquisicao, status_livro_emprestado)
+                                VALUES
+                                ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+                                RETURNING id_livro;`;
+
+            const respostaBD = await database.query(queryInsertLivro, [
+                livro.titulo.toUpperCase(),
+                livro.autor.toUpperCase(),
+                livro.editora.toUpperCase(),
+                livro.ano_publicacao,
+                livro.isbn,
+                livro.quant_total,
+                livro.quant_disponivel,
+                livro.valor_aquisicao,
+                livro.status_livro_emprestado
+            ]);
+            if (respostaBD.rows.length > 0) {
+                console.info(`Livro cadastrado com sucesso. ID: ${respostaBD.rows[0].id_livro}`);
+                return true;
+            }
+            return false;
+        } catch (error) {
+            console.error(`Erro na consulta ao banco de dados. ${error}`);
+            return false;
+        }
+    }
+}
 export default Livro;

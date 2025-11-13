@@ -1,37 +1,38 @@
-CREATE TABLE Aluno (
-    id_aluno INTEGER GENERATED ALWAYS NOT NULL,
-    ra VARCHAR (7) UNIQUE NOT NULL,
-    nome VARCHAR (80) NOT NULL,
-	sobrenome VARCHAR (80) NOT NULL,
+CREATE TABLE aluno (
+    id_aluno INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    ra VARCHAR(7) UNIQUE NOT NULL,
+    nome VARCHAR(80) NOT NULL,
+    sobrenome VARCHAR(80) NOT NULL,
     data_nascimento DATE,
-    endereco VARCHAR (200),
-    email VARCHAR (80),
-    celular VARCHAR (20) NOT NULL
+    endereco VARCHAR(200),
+    email VARCHAR(80),
+    celular VARCHAR(20) NOT NULL
 );
 
-CREATE TABLE Livro (
-    id_livro INT GENERATED ALWAYS NOT NULL,
-    titulo VARCHAR (200) NOT NULL,
-    autor VARCHAR (150) NOT NULL,
-    editora VARCHAR (100) NOT NULL,
-    ano_publicacao VARCHAR (5),
-	isbn VARCHAR (20),
-    quant_total INTEGER NOT NULL,
-    quant_disponivel INTEGER NOT NULL,
-    valor_aquisicao DECIMAL (10,2),
-    status_livro_emprestado VARCHAR (20)
+CREATE TABLE livro (
+    id_livro INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    titulo VARCHAR(100) NOT NULL,
+    autor VARCHAR(80),
+	editora VARCHAR (80),
+	ano_publicacao VARCHAR (4),
+	isbn VARCHAR (80),
+	quant_total VARCHAR (80),
+	quant_disponivel VARCHAR (80),
+	valor_aquisicao DECIMAL (10,2),
+	status_livro_emprestado VARCHAR (20)
 );
 
-CREATE TABLE Emprestimo (
-    id_emprestimo INTEGER GENERATED ALWAYS NOT NULL,
-    id_aluno INT REFERENCES Aluno(id_aluno),
-    id_livro INT REFERENCES Livro(id_livro),
-    data_emprestimo DATE NOT NULL,
-    data_devolucao DATE,
-    status_emprestimo VARCHAR (20)
+CREATE TABLE emprestimos (
+    idEmprestimo INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    idAluno INT REFERENCES Aluno(id_aluno),
+    idLivro INT REFERENCES Livro(id_livro),
+    dataEmprestimo DATE NOT NULL,
+    dataDevolucao DATE,
+    statusEmprestimo VARCHAR(20)
 );
 
-INSERT INTO Aluno (ra, nome, sobrenome, data_nascimento, endereco, email, celular) 
+
+INSERT INTO aluno (ra, nome, sobrenome, dataNascimento, endereco, email, celular) 
 VALUES 
 ('8364528', 'Conor', 'McGregor', '2005-01-15', 'Rua UFC, 123', 'mcgregor@ufc.com', '16998959876'),
 ('2437432', 'Amanda', 'Nunes', '2004-03-22', 'Rua UFC, 456', 'amanda.nunes@ufc.com', '16995992305'),
@@ -55,7 +56,7 @@ VALUES
 ('7364562', 'Luciana', 'Costa', '2003-07-22', 'Rua Santa Rita, 329', 'lucianacosta@gmail.com', '16936475623');
 
 
-INSERT INTO Livro (titulo, autor, editora, ano_publicacao, isbn, quant_total, quant_disponivel, valor_aquisicao, status_livro_emprestado) 
+INSERT INTO livro (titulo, autor, editora, anoPublicacao, isbn, quantTotal, quantDisponivel, valorAquisicao, statusLivroEmprestado) 
 VALUES 
 ('O Senhor dos Anéis', 'J.R.R. Tolkien', 'HarperCollins', '1954', '978-0007525546', 10, 10, 150.00, 'Disponível'),
 ('1984', 'George Orwell', 'Companhia das Letras', '1949', '978-8535906770', 8, 8, 90.00, 'Disponível'),
@@ -78,8 +79,9 @@ VALUES
 ('O Sol é para Todos', 'Harper Lee', 'José Olympio', '1960', '978-8503012703', 7, 7, 90.00, 'Disponível'),
 ('A Montanha Mágica', 'Thomas Mann', 'Companhia das Letras', '1924', '978-8535925009', 4, 4, 150.00, 'Disponível');
 
-INSERT INTO Emprestimo (id_aluno, id_livro, data_emprestimo, data_devolucao, status_emprestimo) 
-VALUES 
+
+INSERT INTO Emprestimo (data_emprestimo, data_devolucao, status_emprestimo)
+VALUES
 ('2024-09-01', '2024-09-15', 'Em andamento'),
 ('2024-09-02', '2024-09-16', 'Em andamento'),
 ('2024-09-03', '2024-09-17', 'Em andamento'),
@@ -90,9 +92,6 @@ VALUES
 ('2024-09-08', '2024-09-22', 'Em andamento'),
 ('2024-09-09', '2024-09-23', 'Em andamento'),
 ('2024-09-10', '2024-09-24', 'Em andamento'),
-('2024-09-11', '2024-09-25', 'Em andamento'),
-('2024-09-11', '2024-09-25', 'Em andamento'),
-('2024-09-11', '2024-09-25', 'Em andamento'),
 ('2024-09-11', '2024-09-25', 'Em andamento'),
 ('2024-09-12', '2024-09-26', 'Em andamento'),
 ('2024-09-13', '2024-09-27', 'Em andamento'),
