@@ -23,12 +23,12 @@ CREATE TABLE livro (
 );
 
 CREATE TABLE emprestimos (
-    idEmprestimo INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    idAluno INT REFERENCES Aluno(id_aluno),
-    idLivro INT REFERENCES Livro(id_livro),
-    dataEmprestimo DATE NOT NULL,
-    dataDevolucao DATE,
-    statusEmprestimo VARCHAR(20)
+    id_emprestimo INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    id_aluno INT REFERENCES Aluno(id_aluno),
+    id_livro INT REFERENCES Livro(id_livro),
+    data_emprestimo DATE NOT NULL,
+    data_devolucao DATE,
+    status_emprestimo VARCHAR(20)
 );
 
 
@@ -80,36 +80,25 @@ VALUES
 ('A Montanha Mágica', 'Thomas Mann', 'Companhia das Letras', '1924', '978-8535925009', 4, 4, 150.00, 'Disponível');
 
 
-INSERT INTO Emprestimo (data_emprestimo, data_devolucao, status_emprestimo)
-VALUES
-('2024-09-01', '2024-09-15', 'Em andamento'),
-('2024-09-02', '2024-09-16', 'Em andamento'),
-('2024-09-03', '2024-09-17', 'Em andamento'),
-('2024-09-04', '2024-09-18', 'Em andamento'),
-('2024-09-05', '2024-09-19', 'Em andamento'),
-('2024-09-06', '2024-09-20', 'Em andamento'),
-('2024-09-07', '2024-09-21', 'Em andamento'),
-('2024-09-08', '2024-09-22', 'Em andamento'),
-('2024-09-09', '2024-09-23', 'Em andamento'),
-('2024-09-10', '2024-09-24', 'Em andamento'),
-('2024-09-11', '2024-09-25', 'Em andamento'),
-('2024-09-12', '2024-09-26', 'Em andamento'),
-('2024-09-13', '2024-09-27', 'Em andamento'),
-('2024-09-14', '2024-09-28', 'Em andamento'),
-('2024-09-15', '2024-09-29', 'Em andamento'),
-('2024-09-16', '2024-09-30', 'Em andamento'),
-('2024-09-17', '2024-10-01', 'Em andamento'),
-('2024-09-18', '2024-10-02', 'Em andamento'),
-('2024-09-19', '2024-10-03', 'Em andamento'),
-('2024-09-20', '2024-10-04', 'Em andamento'),
-('2024-09-21', '2024-10-05', 'Em andamento'),
-('2024-09-22', '2024-10-06', 'Em andamento'),
-('2024-09-23', '2024-10-07', 'Em andamento'),
-('2024-09-24', '2024-10-08', 'Em andamento'),
-('2024-09-25', '2024-10-09', 'Em andamento'),
-('2024-09-26', '2024-10-10', 'Em andamento'),
-('2024-09-27', '2024-10-11', 'Em andamento'),
-('2024-09-28', '2024-10-12', 'Em andamento'),
-('2024-09-29', '2024-10-13', 'Em andamento'),
-('2024-09-30', '2024-10-14', 'Em andamento'),
-('2024-10-01', '2024-10-15', 'Em andamento');
+INSERT INTO Emprestimo (id_aluno, id_livro, data_emprestimo, data_devolucao, status_emprestimo)
+VALUES  
+(1, 2, '2024-09-01', '2024-09-15', 'Em andamento'),
+(2, 3, '2024-09-02', '2024-09-16', 'Em andamento'),
+(3, 5, '2024-09-03', '2024-09-17', 'Em andamento'),
+(4, 7, '2024-09-04', '2024-09-18', 'Em andamento'),
+(5, 1, '2024-09-05', '2024-09-19', 'Em andamento'),
+(6, 4, '2024-09-06', '2024-09-20', 'Em andamento'),
+(7, 6, '2024-09-07', '2024-09-21', 'Em andamento'),
+(8, 8, '2024-09-08', '2024-09-22', 'Em andamento'),
+(9, 9, '2024-09-09', '2024-09-23', 'Em andamento'),
+(10, 10, '2024-09-10', '2024-09-24', 'Em andamento'),
+(11, 11, '2024-09-11', '2024-09-25', 'Em andamento'),
+(12, 12, '2024-09-12', '2024-09-26', 'Em andamento'),
+(13, 13, '2024-09-13', '2024-09-27', 'Em andamento'),
+(14, 14, '2024-09-14', '2024-09-28', 'Em andamento'),
+(15, 15, '2024-09-15', '2024-09-29', 'Em andamento'),
+(16, 16, '2024-09-16', '2024-09-30', 'Em andamento'),
+(17, 17, '2024-09-17', '2024-10-01', 'Em andamento'),
+(18, 18, '2024-09-18', '2024-10-02', 'Em andamento'),
+(19, 19, '2024-09-19', '2024-10-03', 'Em andamento'),
+(20, 20, '2024-09-20', '2024-10-04', 'Em andamento');

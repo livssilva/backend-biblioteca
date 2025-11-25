@@ -16,5 +16,5 @@ router.post("/api/cadastrar/aluno", AlunoController.novo);
 router.get("/api/livro", LivroController.todos);
 router.post("/api/cadastrar/livro", LivroController.novo);
 
-router.get("/api/emprestimo", EmprestimoController.todos);
+router.get("/api/emprestimo", EmprestimoController.todosEmprestimos);
 export { router };
