@@ -37,122 +37,122 @@ class Livro {
         this.quantDisponivel = _quantDisponivel;
         this.valorAquisicao = _valorAquisicao;
         this.statusLivroEmprestado = _statusLivroEmprestado;
-    }  
+    }
 
 
-public getIdLivro(): number{ 
+    public getIdLivro(): number {
         return this.idLivro;
-    }    
-public setIdLivro(_idLivro: number): void{
-    this.idLivro = _idLivro;
-}
+    }
+    public setIdLivro(_idLivro: number): void {
+        this.idLivro = _idLivro;
+    }
 
-public getTitulo(): string{ 
+    public getTitulo(): string {
         return this.titulo;
-    }    
-public setTitulo(_titulo: string): void{
-    this.titulo = _titulo;
-}
+    }
+    public setTitulo(_titulo: string): void {
+        this.titulo = _titulo;
+    }
 
 
-public getAutor(): string{
-    return this.autor;
-}
-public setAutor(_autor: string){
-    this.autor = _autor;
-}
+    public getAutor(): string {
+        return this.autor;
+    }
+    public setAutor(_autor: string) {
+        this.autor = _autor;
+    }
 
 
-public getEditora (): string{
-    return this.editora;
-}
-public setEditora(_editora: string){
-    this.editora = _editora;
-}
+    public getEditora(): string {
+        return this.editora;
+    }
+    public setEditora(_editora: string) {
+        this.editora = _editora;
+    }
 
 
-public getAnoPublicacao (): number{
-    return this.anoPublicacao;
-}
-public setAnoPublicacao(_anoPublicacao: number){
-    this.anoPublicacao = _anoPublicacao;
-}
+    public getAnoPublicacao(): number {
+        return this.anoPublicacao;
+    }
+    public setAnoPublicacao(_anoPublicacao: number) {
+        this.anoPublicacao = _anoPublicacao;
+    }
 
 
-public getIsbn (): number{
-    return this.isbn;
-}
-public setIsbn(_isbn: number){
-    this.isbn = _isbn;
-}
+    public getIsbn(): number {
+        return this.isbn;
+    }
+    public setIsbn(_isbn: number) {
+        this.isbn = _isbn;
+    }
 
 
-public getQuantTotal (): number{
-    return this.quantTotal;
-}
-public setQuantTotal(_quantTotal: number){
-    this.quantTotal = _quantTotal;
-}
+    public getQuantTotal(): number {
+        return this.quantTotal;
+    }
+    public setQuantTotal(_quantTotal: number) {
+        this.quantTotal = _quantTotal;
+    }
 
 
-public getQuantDisponivel (): number{
-    return this.quantDisponivel;
-}
-public setQuantDisponivel(_quantDisponivel: number){
-    this.quantDisponivel = _quantDisponivel;
-}
+    public getQuantDisponivel(): number {
+        return this.quantDisponivel;
+    }
+    public setQuantDisponivel(_quantDisponivel: number) {
+        this.quantDisponivel = _quantDisponivel;
+    }
 
 
-public getValorAquisicao (): number{
-    return this.valorAquisicao;
-}
-public setValorAquisicao (_valorAquisicao: number){
-    this.valorAquisicao = _valorAquisicao;
-}
+    public getValorAquisicao(): number {
+        return this.valorAquisicao;
+    }
+    public setValorAquisicao(_valorAquisicao: number) {
+        this.valorAquisicao = _valorAquisicao;
+    }
 
 
-public getStatusLivroEmprestado (): string{
-    return this.statusLivroEmprestado;
-}
-public setStatusLivroEmprestado (_statusLivroEmprestado: string){
-    this.statusLivroEmprestado = _statusLivroEmprestado;
-}
+    public getStatusLivroEmprestado(): string {
+        return this.statusLivroEmprestado;
+    }
+    public setStatusLivroEmprestado(_statusLivroEmprestado: string) {
+        this.statusLivroEmprestado = _statusLivroEmprestado;
+    }
 
-    static async listarLivros (): Promise<Array<Livro> | null>{
-        try{
+    static async listarLivros(): Promise<Array<Livro> | null> {
+        try {
             let listaDeLivros: Array<Livro> = [];
 
             const querySelectLivros = `SELECT * FROM livro`;
 
-           const respostaBD = await database.query(querySelectLivros);
+            const respostaBD = await database.query(querySelectLivros);
 
-           respostaBD.rows.forEach((livroBD: any) => {
-            const novoLivro: Livro = new Livro(
-                livroBD.titulo,
-                livroBD.autor,
-                livroBD.editora,
-                livroBD.anoPublicacao,
-                livroBD.isbn,
-                livroBD.quantTotal,
-                livroBD.quantDisponivel,
-                livroBD.valorAquisicao,
-                livroBD.statusLivroEmprestado
-            );
+            respostaBD.rows.forEach((livroBD: any) => {
+                const novoLivro: Livro = new Livro(
+                    livroBD.titulo,
+                    livroBD.autor,
+                    livroBD.editora,
+                    livroBD.anoPublicacao,
+                    livroBD.isbn,
+                    livroBD.quantTotal,
+                    livroBD.quantDisponivel,
+                    livroBD.valorAquisicao,
+                    livroBD.statusLivroEmprestado
+                );
 
-            novoLivro.setIdLivro(livroBD.id_livro);
+                novoLivro.setIdLivro(livroBD.id_livro);
 
-            listaDeLivros.push(novoLivro);
+                listaDeLivros.push(novoLivro);
 
-           });
+            });
 
-           return listaDeLivros
+            return listaDeLivros
         } catch (error) {
             console.error(`Erro ao acessar o banco de dados. ${error}`);
             return null;
         }
     }
 
-     static async cadastrarLivro(livro: LivroDTO): Promise<boolean> {
+    static async cadastrarLivro(livro: LivroDTO): Promise<boolean> {
         try {
             const queryInsertLivro = `INSERT INTO livro (titulo, autor, editora, ano_publicacao, isbn, quant_total, quant_disponivel, valor_aquisicao, status_livro_emprestado)
                                 VALUES
@@ -163,12 +163,12 @@ public setStatusLivroEmprestado (_statusLivroEmprestado: string){
                 livro.titulo.toUpperCase(),
                 livro.autor.toUpperCase(),
                 livro.editora.toUpperCase(),
-                livro.ano_publicacao,
+                livro.anoPublicacao,
                 livro.isbn,
-                livro.quant_total,
-                livro.quant_disponivel,
-                livro.valor_aquisicao,
-                livro.status_livro_emprestado
+                livro.quantTotal,
+                livro.quantDisponivel,
+                livro.valorAquisicao,
+                livro.statusLivroEmprestado
             ]);
             if (respostaBD.rows.length > 0) {
                 console.info(`Livro cadastrado com sucesso. ID: ${respostaBD.rows[0].id_livro}`);

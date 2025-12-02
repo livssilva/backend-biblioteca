@@ -1,11 +1,11 @@
 export interface AlunoDTO {
     idAluno?: number,
     ra: number,
-    nome: string, 
+    nome: string,
     sobrenome: string,
-    data_nascimento: Date, 
+    dataNascimento: Date,
     endereco: string,
     email: string,
     celular: number
-    situacao?: boolean 
+    situacao?: boolean
 }

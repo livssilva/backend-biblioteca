@@ -15,7 +15,7 @@ class Aluno {
 
 
     constructor(
-         _ra: number,
+        _ra: number,
         _nome: string,
         _sobrenome: string,
         _dataNascimento: Date,
@@ -30,89 +30,89 @@ class Aluno {
         this.endereco = _endereco;
         this.email = _email;
         this.celular = _celular;
-    }  
+    }
 
-public getIdAluno(): number{ 
+    public getIdAluno(): number {
         return this.ra;
-    }    
-public setIdAluno(_idAluno: number): void{
-    this.idAluno = _idAluno;
-}
+    }
+    public setIdAluno(_idAluno: number): void {
+        this.idAluno = _idAluno;
+    }
 
-public getRa(): number{ 
+    public getRa(): number {
         return this.ra;
-    }    
-public setRa(_ra: number): void{
-    this.ra = _ra;
-}
+    }
+    public setRa(_ra: number): void {
+        this.ra = _ra;
+    }
 
-public getNome(): string{
-    return this.nome;
-}
-public setNome(_nome: string){
-    this.nome = _nome;
-}
+    public getNome(): string {
+        return this.nome;
+    }
+    public setNome(_nome: string) {
+        this.nome = _nome;
+    }
 
-public getSobrenome (): string{
-    return this.sobrenome;
-}
-public setSobrenome(_sobrenome: string){
-    this.sobrenome = _sobrenome;
-}
+    public getSobrenome(): string {
+        return this.sobrenome;
+    }
+    public setSobrenome(_sobrenome: string) {
+        this.sobrenome = _sobrenome;
+    }
 
-public getDataNascimento (): Date{
-    return this.dataNascimento;
-}
-public setDataNascimento(_dataNascimento: Date){
-    this.dataNascimento = _dataNascimento;
-}
+    public getDataNascimento(): Date {
+        return this.dataNascimento;
+    }
+    public setDataNascimento(_dataNascimento: Date) {
+        this.dataNascimento = _dataNascimento;
+    }
 
-public getEndereco (): string{
-    return this.endereco;
-}
-public setEndereco(_endereco: string){
-    this.endereco = _endereco;
-}
+    public getEndereco(): string {
+        return this.endereco;
+    }
+    public setEndereco(_endereco: string) {
+        this.endereco = _endereco;
+    }
 
-public getEmail (): string{
-    return this.email;
-}
-public setEmail(_email: string){
-    this.email = _email;
-}
+    public getEmail(): string {
+        return this.email;
+    }
+    public setEmail(_email: string) {
+        this.email = _email;
+    }
 
-public getCelular (): number{
-    return this.celular;
-}
-public setCelular(_celular: number){
-    this.celular = _celular;
-}
+    public getCelular(): number {
+        return this.celular;
+    }
+    public setCelular(_celular: number) {
+        this.celular = _celular;
+    }
 
-    static async listarAlunos (): Promise<Array<Aluno> | null>{
-        try{
+    static async listarAlunos(): Promise<Array<Aluno> | null> {
+        try {
             let listaDeAlunos: Array<Aluno> = [];
 
             const querySelectAlunos = `SELECT * FROM aluno`;
 
-           const respostaBD = await database.query(querySelectAlunos);
+            const respostaBD = await database.query(querySelectAlunos);
 
-           respostaBD.rows.forEach((alunoBD: any) => {
-            const novoAluno: Aluno = new Aluno(
-                alunoBD.ra,
-                alunoBD.nome,
-                alunoBD.sobrenome,
-                alunoBD.dataNascimento,
-                alunoBD.endereco,
-                alunoBD.email,
-                alunoBD.celular
-            );
+            respostaBD.rows.forEach((alunoBD: any) => {
+                const novoAluno: Aluno = new Aluno(
+                    alunoBD.ra,
+                    alunoBD.nome,
+                    alunoBD.sobrenome,
+                    alunoBD.dataNascimento,
+                    alunoBD.endereco,
+                    alunoBD.email,
+                    alunoBD.celular
+                );
 
-            novoAluno.setIdAluno(alunoBD.id_aluno);
+                novoAluno.setIdAluno(alunoBD.id_aluno);
 
-            listaDeAlunos.push(novoAluno);
+                listaDeAlunos.push(novoAluno);
 
-           });
-           return listaDeAlunos
+            });
+            return listaDeAlunos
 
         } catch (error) {
             console.error(`Erro ao acessar o banco de dados. ${error}`);
@@ -120,7 +120,7 @@ public setCelular(_celular: number){
         }
     }
 
-         static async cadastrarAluno(aluno: AlunoDTO): Promise<boolean> {
+    static async cadastrarAluno(aluno: AlunoDTO): Promise<boolean> {
         try {
             const queryInsertAluno = `INSERT INTO aluno (ra, nome, sobrenome, data_nascimento, endereco, email, celular)
                                 VALUES
@@ -131,7 +131,7 @@ public setCelular(_celular: number){
                 aluno.ra,
                 aluno.nome.toUpperCase(),
                 aluno.sobrenome.toUpperCase(),
-                aluno.data_nascimento,
+                aluno.dataNascimento,
                 aluno.endereco,
                 aluno.email,
                 aluno.celular
@@ -147,22 +147,22 @@ public setCelular(_celular: number){
         }
     }
 
-    static async listarAluno(idAluno: number): Promise<Aluno | null >  {
+    static async listarAluno(idAluno: number): Promise<Aluno | null> {
         try {
             const querySelectAlunos = `SELECT * FROM aluno WHERE id_aluno=$1;`;
 
             const respostaBD = await database.query(querySelectAlunos, [idAluno]);
 
-            if(respostaBD.rowCount != 0){
+            if (respostaBD.rowCount != 0) {
                 const aluno: Aluno = new Aluno(
 
-                respostaBD.rows[0].ra,
-                 respostaBD.rows[0].nome,
-                 respostaBD.rows[0].sobrenome,
-                 respostaBD.rows[0].dataNascimento,
-                 respostaBD.rows[0].endereco,
-                 respostaBD.rows[0].email,
-                 respostaBD.rows[0].celular,
+                    respostaBD.rows[0].ra,
+                    respostaBD.rows[0].nome,
+                    respostaBD.rows[0].sobrenome,
+                    respostaBD.rows[0].dataNascimento,
+                    respostaBD.rows[0].endereco,
+                    respostaBD.rows[0].email,
+                    respostaBD.rows[0].celular,
 
                 );
                 aluno.setIdAluno(respostaBD.rows[0].id_aluno);

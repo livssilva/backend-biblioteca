@@ -88,11 +88,10 @@ class Emprestimo {
                     emprestimoBD.status_emprestimo
                 );
 
-                novoEmprestimo.setIdLivro(emprestimoBD.id_emprestimo);
+                novoEmprestimo.setIdEmprestimo(emprestimoBD.id_emprestimo);
 
                 listaDeEmprestimo.push(novoEmprestimo);
             });
-
             return listaDeEmprestimo;
         } catch (error) {
             console.error(`Erro na consulta ao banco de dados. ${error}`);
